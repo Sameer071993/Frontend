@@ -1,0 +1,74 @@
+/* Container styles */
+.gameover-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
+    color: #fff;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Card styles */
+  .gameover-card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    width: 80%;
+    max-width: 400px;
+  }
+  
+  /* Title styles */
+  .gameover-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Score styles */
+  .gameover-score {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .gameover-score span {
+    font-weight: bold;
+    color: #ffd700; /* Gold color */
+  }
+  
+  /* Button container */
+  .gameover-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Button styles */
+  .gameover-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .gameover-button-restart {
+    background: #f44336; /* Red */
+    color: #fff;
+  }
+  
+  .gameover-button-next {
+    background: #4caf50; /* Green */
+    color: #fff;
+  }
+  
+  /* Button hover effects */
+  .gameover-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  

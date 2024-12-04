@@ -1,0 +1,122 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Disable scrollbars for a fullscreen experience */
+    background-color: #282c34; /* Add a background for the entire page */
+    font-family: Arial, sans-serif; /* Use a clean, readable font */
+    color: white; /* Default text color */
+}
+
+/* Fullscreen container for the falling word */
+.falling-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust container height for better visibility */
+    background: rgb(167, 153, 30); /* Eye-catching background color */
+    overflow: hidden; /* Ensure the word stays within bounds */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; /* Space below the falling container */
+    border: 2px solid #444; /* Optional border for styling */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}
+
+/* Falling word animation */
+.falling-word {
+    position: absolute;
+    top: -50px; /* Start slightly above the visible area */
+    left: 50%;
+    transform: translateX(-50%);
+
+    animation: fall 7s linear infinite; /* Continuous fall animation */
+}
+
+/* Keyframes for the falling effect */
+@keyframes fall {
+    0% {
+        top: -50px; /* Start above the container */
+    }
+    100% {
+        top: 400px; /* End just below the container */
+    }
+}
+
+/* Score display styles */
+.score {
+    font-size: 24px; /* Larger font for visibility */
+    font-weight: bold;
+    color: white;
+    margin-bottom: 2px;
+    position: relative; /* Necessary for particle positioning */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add a subtle shadow for readability */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transformation effects */
+    display: inline-block; /* Prevent text flow changes */
+}
+
+/* Animation for score update */
+.score.animate {
+    transform: scale(1.3); /* Slightly larger scale for emphasis */
+    color: yellow; /* Highlight color change */
+    animation: firecracker 0.6s ease-out; /* Firecracker effect */
+    text-align: center; /* Keep text aligned */
+}
+
+/* Keyframes for firecracker effect */
+@keyframes firecracker {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 5px yellow, 0 0 10px orange, 0 0 15px red;
+    }
+    50% {
+        transform: scale(1.3); /* Scale up */
+        text-shadow: 0 0 15px yellow, 0 0 30px orange, 0 0 45px red;
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px yellow, 0 0 10px orange, 0 0 15px red;
+    }
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    .falling-word {
+        font-size: 32px; /* Adjust font size for smaller screens */
+    }
+
+    .falling-container {
+        height: 300px; /* Reduce height for better layout on small devices */
+    }
+
+    .score {
+        font-size: 20px; /* Adjust score size for readability */
+    }
+}
+
+/* Optional button styles (e.g., for 'Play Again') */
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #21a1f1;
+}
+
+/* Input field styles */
+
+
+.centerdiv{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
