@@ -6,11 +6,11 @@ import Home from './component/Home';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/Frontend"> {/* Replace 'Frontend' with your repository name */}
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/level1" element={<Keyword />} />
-      <Route path="/gameover" element={<Gameover />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/level1" element={<Keyword />} />
+        <Route path="/gameover" element={<Gameover />} />
       </Routes>
     </Router>
   );

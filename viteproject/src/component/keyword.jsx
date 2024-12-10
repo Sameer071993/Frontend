@@ -59,20 +59,56 @@ const Keyword = () => {
   }, [currentIndex]);
 
   const renderHighlightedWord = () => {
+    const wordLength = targetWord.length;
+  
+    // Dynamic size calculation based on word length
+    const size = Math.max(100, wordLength * 15); // Minimum size is 100px
+  
     if (targetWord.startsWith(userInput)) {
       const matchedPart = targetWord.slice(0, userInput.length);
       const remainingPart = targetWord.slice(userInput.length);
-
+  
       return (
-        <>
+        <div
+          style={{
+            height: `${size}px`,
+            width: `${size}px`,
+            borderRadius: "50%", // Circular shape
+
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            fontSize: `${Math.min(size / 3, 24)}px`, // Adjust font size dynamically
+            fontWeight: "bold",
+          }}
+        >
           <span style={{ color: "#013220" }}>{matchedPart}</span>
           <span style={{ color: "white" }}>{remainingPart}</span>
-        </>
+        </div>
       );
     }
+  
+    return (
+      <div
+        style={{
+          height: `${size}px`,
+          width: `${size}px`,
+          borderRadius: "50%",
 
-    return <span style={{ color: "white" }}>{targetWord}</span>;
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+
+          fontSize: `${Math.min(size / 3, 24)}px`,
+          fontWeight: "bold",
+        }}
+      >
+        {targetWord}
+      </div>
+    );
   };
+  
 
   return (
     <div style={{ color: "#fff", backgroundColor: "#282c34", padding: "5px", minHeight: "100vh" }}>
@@ -80,7 +116,7 @@ const Keyword = () => {
         {level2 ? "Level 2: Typing Challenge" : "Level 1: Typing Challenge"}
       </h1>
       <div className="falling-container" key={fallingWordKey} style={{ marginBottom: "10px" }}>
-        <span className="falling-word" style={{ fontSize: "60px", fontWeight: "bold" }}>
+        <span className="bouncer" style={{ fontSize: "40px", fontWeight: "bold" }}>
           {renderHighlightedWord()}
         </span>
       </div>
@@ -93,23 +129,28 @@ const Keyword = () => {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <input
-          type="text"
-          value={userInput}
-          autoFocus
-          onChange={handleInputChange}
-          style={{
-            fontSize: "18px",
-            padding: "10px",
-            borderRadius: "5px",
-            border: "2px solid #ccc",
-            outline: "none",
-            width: "80%",
-            maxWidth: "400px",
-            textAlign: "center",
-          }}
-        />
-      </div>
+  <input
+    type="text"
+    value={userInput}
+    autoFocus
+    onChange={handleInputChange}
+    onPaste={(e) => {
+      e.preventDefault();
+      alert("Pasting is disabled for this input field.");
+    }}
+    style={{
+      fontSize: "18px",
+      padding: "10px",
+      borderRadius: "5px",
+      border: "2px solid #ccc",
+      outline: "none",
+      width: "80%",
+      maxWidth: "400px",
+      textAlign: "center",
+    }}
+  />
+</div>
+
     </div>
   );
 };
