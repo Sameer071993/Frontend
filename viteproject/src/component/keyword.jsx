@@ -16,10 +16,8 @@ const Keyword = () => {
   const [isMatched, setIsMatched] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Function to move to the next word
   const getNextWord = () => {
     if (currentIndex + 1 >= levelWords.length) {
-      // Use setTimeout to defer navigation after rendering completes
       setTimeout(() => {
         navigate("/gameover", { state: { score, level2 } });
       }, 0);
@@ -44,6 +42,26 @@ const Keyword = () => {
     }
   };
 
+  const handleVirtualKey = (key) => {
+    let newInput = userInput;
+
+    if (key === "BACKSPACE") {
+      newInput = newInput.slice(0, -1);
+    } else if (key === "SPACE") {
+      newInput += " ";
+    } else {
+      newInput += key;
+    }
+
+    setUserInput(newInput);
+
+    if (newInput === targetWord) {
+      setIsMatched(true);
+      setScore((prevScore) => prevScore + 1);
+      setTimeout(() => getNextWord(), 1000);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prevTimer) => {
@@ -60,26 +78,23 @@ const Keyword = () => {
 
   const renderHighlightedWord = () => {
     const wordLength = targetWord.length;
-  
-    // Dynamic size calculation based on word length
-    const size = Math.max(100, wordLength * 15); // Minimum size is 100px
-  
+    const size = Math.max(100, wordLength * 15);
+
     if (targetWord.startsWith(userInput)) {
       const matchedPart = targetWord.slice(0, userInput.length);
       const remainingPart = targetWord.slice(userInput.length);
-  
+
       return (
         <div
           style={{
             height: `${size}px`,
             width: `${size}px`,
-            borderRadius: "50%", // Circular shape
-
+            borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             color: "white",
-            fontSize: `${Math.min(size / 3, 24)}px`, // Adjust font size dynamically
+            fontSize: `${Math.min(size / 3, 24)}px`,
             fontWeight: "bold",
           }}
         >
@@ -88,18 +103,17 @@ const Keyword = () => {
         </div>
       );
     }
-  
+    
+
     return (
       <div
         style={{
           height: `${size}px`,
           width: `${size}px`,
           borderRadius: "50%",
-
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-
           fontSize: `${Math.min(size / 3, 24)}px`,
           fontWeight: "bold",
         }}
@@ -108,7 +122,12 @@ const Keyword = () => {
       </div>
     );
   };
-  
+
+  const keys = [
+    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+    "SPACE",
+    "BACKSPACE",
+  ];
 
   return (
     <div style={{ color: "#fff", backgroundColor: "#282c34", padding: "5px", minHeight: "100vh" }}>
@@ -129,28 +148,55 @@ const Keyword = () => {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-  <input
-    type="text"
-    value={userInput}
-    autoFocus
-    onChange={handleInputChange}
-    onPaste={(e) => {
-      e.preventDefault();
-      alert("Pasting is disabled for this input field.");
-    }}
-    style={{
-      fontSize: "18px",
-      padding: "10px",
-      borderRadius: "5px",
-      border: "2px solid #ccc",
-      outline: "none",
-      width: "80%",
-      maxWidth: "400px",
-      textAlign: "center",
-    }}
-  />
-</div>
+        <input
+          type="text"
+          value={userInput}
+          autoFocus
+          onChange={handleInputChange}
+          onPaste={(e) => {
+            e.preventDefault();
+            alert("Pasting is disabled for this input field.");
+          }}
+          style={{
+            fontSize: "18px",
+            padding: "10px",
+            borderRadius: "5px",
+            border: "2px solid #ccc",
+            outline: "none",
+            width: "80%",
+            maxWidth: "400px",
+            textAlign: "center",
+          }}
+        />
+      </div>
 
+      {/* Virtual Keypad */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          gap: "5px",
+          marginTop: "20px",
+          textAlign: "center",
+        }}
+      >
+        {keys.map((key) => (
+          <button
+            key={key}
+            onClick={() => handleVirtualKey(key === "SPACE" ? " " : key)}
+            style={{
+              padding: "15px",
+              fontSize: "16px",
+              borderRadius: "5px",
+              backgroundColor: "#61dafb",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            {key === "SPACE" ? "␣" : key === "BACKSPACE" ? "⌫" : key}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
