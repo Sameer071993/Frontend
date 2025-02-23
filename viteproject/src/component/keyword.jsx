@@ -103,7 +103,6 @@ const Keyword = () => {
         </div>
       );
     }
-    
 
     return (
       <div
@@ -123,10 +122,11 @@ const Keyword = () => {
     );
   };
 
-  const keys = [
-    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
-    "SPACE",
-    "BACKSPACE",
+  const qwertyKeys = [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["Z", "X", "C", "V", "B", "N", "M"],
+    ["SPACE", "BACKSPACE"]
   ];
 
   return (
@@ -170,31 +170,28 @@ const Keyword = () => {
         />
       </div>
 
-      {/* Virtual Keypad */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(7, 1fr)",
-          gap: "5px",
-          marginTop: "20px",
-          textAlign: "center",
-        }}
-      >
-        {keys.map((key) => (
-          <button
-            key={key}
-            onClick={() => handleVirtualKey(key === "SPACE" ? " " : key)}
-            style={{
-              padding: "15px",
-              fontSize: "16px",
-              borderRadius: "5px",
-              backgroundColor: "#61dafb",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            {key === "SPACE" ? "␣" : key === "BACKSPACE" ? "⌫" : key}
-          </button>
+      {/* QWERTY Virtual Keypad */}
+      <div style={{ marginTop: "20px", textAlign: "center" }}>
+        {qwertyKeys.map((row, rowIndex) => (
+          <div key={rowIndex} style={{ marginBottom: "5px" }}>
+            {row.map((key) => (
+              <button
+                key={key}
+                onClick={() => handleVirtualKey(key === "SPACE" ? " " : key)}
+                style={{
+                  padding: "15px",
+                  fontSize: "16px",
+                  borderRadius: "5px",
+                  backgroundColor: "#61dafb",
+                  border: "none",
+                  cursor: "pointer",
+                  margin: "2px",
+                }}
+              >
+                {key === "SPACE" ? "␣" : key === "BACKSPACE" ? "⌫" : key}
+              </button>
+            ))}
+          </div>
         ))}
       </div>
     </div>
